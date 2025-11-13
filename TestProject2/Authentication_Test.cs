@@ -5,6 +5,8 @@ namespace TestProject2
 {
     public class Authentication_Test
     {
+        //POSITIVE TESTS
+
         // this is Start method
         private static IWebDriver Start()
         {
@@ -127,6 +129,29 @@ namespace TestProject2
 
             IWebElement idOfLogOutIndex = driver.FindElement(By.Id("test_logout_button"));
             idOfLogOutIndex.Click();
+        }
+
+        [Fact]
+        // Check if login username is correct
+        public void CheckUserName()
+        {
+            IWebDriver driver = Start();
+
+            Thread.Sleep(500);
+
+            IWebElement idOfLogInIndex = driver.FindElement(By.Id("test_login_index"));
+            idOfLogInIndex.Click();
+
+            Thread.Sleep(500);
+
+            LogInAction(driver);
+
+            Thread.Sleep(500);
+
+            IWebElement dataofUserName = driver.FindElement(By.Id("CheckUserName"));
+            var UserName = dataofUserName.Text;
+
+            Assert.True(UserName == "Jane Doe");
         }
     }
 }
