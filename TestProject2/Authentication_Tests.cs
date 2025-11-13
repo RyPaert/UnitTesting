@@ -3,7 +3,7 @@ using OpenQA.Selenium.Firefox;
 
 namespace TestProject2
 {
-    public class Authentication_Test
+    public class Authentication_Tests
     {
         //POSITIVE TESTS
 
@@ -153,5 +153,9 @@ namespace TestProject2
 
             Assert.True(UserName == "Jane Doe");
         }
+
+
+        //NEGATIVE TESTS
+        
     }
 }
