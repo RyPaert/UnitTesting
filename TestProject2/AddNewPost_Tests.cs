@@ -56,6 +56,9 @@ namespace TestProject2
             idofDescription.SendKeys("Ta on kass");
             Thread.Sleep(500);
 
+            IWebElement uploadFile = driver.FindElement(By.Id("test_FileUpload"));
+            uploadFile.SendKeys("C:\\Users\\opilane\\source\\repos\\UnitTesting\\TestProject2\\Sources\\Cat.jpg");
+
             IWebElement Test_AddPost = driver.FindElement(By.Id("test_SubmitPostFormButton"));
             Test_AddPost.Click();
         }
