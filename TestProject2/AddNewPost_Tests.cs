@@ -22,6 +22,7 @@ namespace TestProject2
         }
 
         [Fact]
+        // Test Add New Post Function
         public void AddNewPost() 
         { 
             IWebDriver driver = Start();
@@ -61,6 +62,25 @@ namespace TestProject2
 
             IWebElement Test_AddPost = driver.FindElement(By.Id("test_SubmitPostFormButton"));
             Test_AddPost.Click();
+        }
+
+        [Fact]
+        // Test Index title and description text
+        public void CheckIndexDetailsInfo()
+        {
+            IWebDriver driver = Start();
+
+            Thread.Sleep(500);
+
+            IWebElement dataofTitle = driver.FindElement(By.Id("test_IndexTitle"));
+            var title = dataofTitle.Text;
+
+            IWebElement dataofDescription = driver.FindElement(By.Id("test_IndexDescription"));
+            var Description = dataofDescription.Text;
+
+            Assert.True(title == "Minu kass");
+
+            Assert.True(Description == "Ta on kass");
         }
     }
 }
