@@ -8,11 +8,11 @@ namespace TestProject2
         [Fact]
         public void Test1()
         {
-            string binaryLocation = "";
+            string binaryLocation = "PORTABLE FIREFOX SIIA";
             FirefoxOptions options = new FirefoxOptions();
             options.BinaryLocation = binaryLocation;
 
-            IWebDriver driver = new FirefoxDriver("", options);
+            IWebDriver driver = new FirefoxDriver("GECKODRIVER SIIA", options);
             driver.Url = "https://github.com/RyPaert";
 
             Thread.Sleep(1000);
