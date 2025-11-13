@@ -72,6 +72,7 @@ namespace TestProject2
             IWebElement idOfRealLogInCreate = driver.FindElement(By.Id("test_LogIn_Create"));
             idOfRealLogInCreate.Click();
             Thread.Sleep(500);
+           
         }
         //login andmete sisestamine
         private static void GetLogInData(IWebDriver driver)
@@ -86,6 +87,26 @@ namespace TestProject2
             idOfEmail.SendKeys("TestPassword");
             Thread.Sleep(500);
  
+        }
+        [Fact]
+        public void LogOut()
+        {
+            IWebDriver driver = Start();
+
+            IWebElement idOfRealLogIN = driver.FindElement(By.Id("test_indexLogIn"));
+            idOfRealLogIN.Click();
+            Thread.Sleep(500);
+
+            GetLogInData(driver);
+
+            IWebElement idOfRealLogInCreate = driver.FindElement(By.Id("test_LogIn_Create"));
+            idOfRealLogInCreate.Click();
+            Thread.Sleep(500);
+
+
+            IWebElement idOfLogOut = driver.FindElement(By.Id("test_logOut"));
+            idOfLogOut.Click();
+            Thread.Sleep(500);
         }
 
     }
