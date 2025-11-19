@@ -8,8 +8,11 @@ using OpenQA.Selenium;
 
 namespace TestProject2
 {
-    public class AddNewPost_Tests
+    public class PostFunctions_Tests
     {
+        //POSITIVE TESTS
+
+        // this is Start method
         private static IWebDriver Start()
         {
             string binasryLocation = "C:\\Users\\opilane\\source\\repos\\Download\\FirefoxPortable\\App\\Firefox64\\firefox.exe";
@@ -20,7 +23,6 @@ namespace TestProject2
             driver.Url = "https://localhost:7260/";
             return driver;
         }
-
         [Fact]
         // Test Add New Post Function
         public void AddNewPost() 
@@ -33,8 +35,10 @@ namespace TestProject2
             Thread.Sleep(500);
 
             InsertPostData(driver);
-        }
 
+            Thread.Sleep(500);
+        }
+        // Insert Post data
         private static void InsertPostData(IWebDriver driver)
         {
             IWebElement idofName = driver.FindElement(By.Id("test_NameLabel"));
@@ -63,7 +67,6 @@ namespace TestProject2
             IWebElement Test_AddPost = driver.FindElement(By.Id("test_SubmitPostFormButton"));
             Test_AddPost.Click();
         }
-
         [Fact]
         // Test Index title and description text
         public void CheckIndexDetailsInfo()
@@ -81,6 +84,58 @@ namespace TestProject2
             Assert.True(title == "Minu kass");
 
             Assert.True(Description == "Ta on kass");
+
+            Thread.Sleep(500);
+        }
+
+        [Fact]
+        // Test delete function
+        public void DeletePost()
+        {
+            IWebDriver driver = Start();
+            Thread.Sleep(500);
+
+            IWebElement idOfLogInIndex = driver.FindElement(By.Id("test_login_index"));
+            idOfLogInIndex.Click();
+
+            Thread.Sleep(500);
+
+            LogInAction(driver);
+
+            Thread.Sleep(500);
+
+            IWebElement idOfDeleteButton = driver.FindElement(By.Id("test_DeleteButton"));
+            idOfDeleteButton.Click();
+
+            Thread.Sleep(500);
+
+        }
+        // Login Function
+        private void LogInAction(IWebDriver driver)
+        {
+            Thread.Sleep(500);
+
+            InsertLogInData(driver);
+
+            Thread.Sleep(500);
+
+            IWebElement SubmitLoginForm = driver.FindElement(By.Id("test_LoginButton"));
+            SubmitLoginForm.Click();
+
+            Thread.Sleep(500);
+        }
+        // Insert Login data
+        private void InsertLogInData(IWebDriver driver)
+        {
+            IWebElement idOfName = driver.FindElement(By.Id("test_LoginUserName"));
+            idOfName.SendKeys("Jane Doe");
+
+            Thread.Sleep(500);
+
+            IWebElement idofPassword = driver.FindElement(By.Id("test_LogInPassword"));
+            idofPassword.SendKeys("JaneDoe1234");
+
+            Thread.Sleep(500);
         }
     }
 }

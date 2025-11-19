@@ -35,6 +35,8 @@ namespace TestProject2
             IWebElement registerAccount = driver.FindElement(By.Id("test_registerAccountButton"));
             registerAccount.Click();
 
+            Thread.Sleep(500);
+
         }
         private void InsertRegistrationData(IWebDriver driver)
         {
@@ -71,6 +73,8 @@ namespace TestProject2
             HaveAnaccountLink.Click();
 
             LogInAction(driver);
+
+            Thread.Sleep(500);
         }
         private void LogInAction(IWebDriver driver)
         {
@@ -82,6 +86,8 @@ namespace TestProject2
 
             IWebElement SubmitLoginForm = driver.FindElement(By.Id("test_LoginButton"));
             SubmitLoginForm.Click();
+
+            Thread.Sleep(500);
         }
         private void InsertLogInData(IWebDriver driver) 
         {
@@ -92,6 +98,7 @@ namespace TestProject2
 
             IWebElement idofPassword = driver.FindElement(By.Id("test_LogInPassword"));
             idofPassword.SendKeys("JaneDoe1234");
+
         }
 
         [Fact]
@@ -108,6 +115,8 @@ namespace TestProject2
             Thread.Sleep(500);
 
             LogInAction(driver);
+
+            Thread.Sleep(500);
         }
 
         [Fact]
@@ -129,6 +138,8 @@ namespace TestProject2
 
             IWebElement idOfLogOutIndex = driver.FindElement(By.Id("test_logout_button"));
             idOfLogOutIndex.Click();
+
+            Thread.Sleep(500);
         }
 
         [Fact]
@@ -152,10 +163,53 @@ namespace TestProject2
             var UserName = dataofUserName.Text;
 
             Assert.True(UserName == "Jane Doe");
+
+            Thread.Sleep(500);
         }
 
 
         //NEGATIVE TESTS
-        
+
+        [Fact]
+        // Check what happent whene you enter wrong password in LogIn form
+        public void CheckPassword()
+        {
+            IWebDriver driver = Start();
+
+            Thread.Sleep(500);
+
+            IWebElement idOfLogInIndex = driver.FindElement(By.Id("test_login_index"));
+            idOfLogInIndex.Click();
+
+            Thread.Sleep(500);
+
+            LogInActionWithWrongPassword(driver);
+        }
+        // Login with wrong password
+        private void LogInActionWithWrongPassword(IWebDriver driver)
+        {
+            Thread.Sleep(500);
+
+            InsertWrongLogInData(driver);
+
+            Thread.Sleep(500);
+
+            IWebElement SubmitLoginForm = driver.FindElement(By.Id("test_LoginButton"));
+            SubmitLoginForm.Click();
+
+            Thread.Sleep(500);
+        }
+        // Insert wrong password to login form
+        private void InsertWrongLogInData(IWebDriver driver)
+        {
+            IWebElement idOfName = driver.FindElement(By.Id("test_LoginUserName"));
+            idOfName.SendKeys("Jane Doe");
+
+            Thread.Sleep(500);
+
+            IWebElement idofPassword = driver.FindElement(By.Id("test_LogInPassword"));
+            idofPassword.SendKeys("JaneDoe12");
+
+        }
     }
 }
