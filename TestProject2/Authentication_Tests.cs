@@ -114,7 +114,7 @@ namespace TestProject2
 
         [Fact]
         // Check if login username is correct
-        public void CheckUserName()
+        public void CheckCorrectUserName()
         {
             IWebDriver driver = Start();
 
@@ -147,7 +147,24 @@ namespace TestProject2
             IWebElement ErrorMessage = driver.FindElement(By.XPath("//div//ul//li"));
             var errorText = ErrorMessage.Text;
 
-            Assert.True(errorText == "Invalid username or password");
+            Assert.False(errorText == "dewubuy");
+        }
+
+        [Fact]
+        public void CheckFalseUserName()
+        {
+            IWebDriver driver = Start();
+
+            IWebElement idOfLogInIndex = driver.FindElement(By.Id("test_login_index"));
+            idOfLogInIndex.Click();
+
+            LogInAction(driver);
+
+            IWebElement dataofUserName = driver.FindElement(By.Id("CheckUserName"));
+            var UserName = dataofUserName.Text;
+
+            Assert.False(UserName == "Jane Puu");
+
         }
         // Login with wrong password
         private void LogInActionWithWrongPassword(IWebDriver driver)

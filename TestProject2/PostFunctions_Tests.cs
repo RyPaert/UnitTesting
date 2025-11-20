@@ -261,5 +261,46 @@ namespace TestProject2
             IWebElement Test_AddPost = driver.FindElement(By.Id("test_SubmitPostFormButton"));
             Test_AddPost.Click();
         }
+
+        //NEGATIVE TESTS
+        [Fact]
+        // Checks details data
+        public void CheckPostDetailsDontAcceptWrongData()
+        {
+            IWebDriver driver = Start();
+
+            IWebElement IdOfPostDetailsIndex = driver.FindElement(By.Id("Post"));
+            IdOfPostDetailsIndex.Click();
+
+            IWebElement IdOfTitle = driver.FindElement(By.Id("test_TitleInDetailsView"));
+            var TitleText = IdOfTitle.Text;
+
+            IWebElement IdOfDescription = driver.FindElement(By.Id("test_DescriptionInDetailsView"));
+            var DescriptionText = IdOfDescription.Text;
+
+            IWebElement IdOfShowMore = driver.FindElement(By.Id("myBtn"));
+            IdOfShowMore.Click();
+
+            IWebElement IdOfName = driver.FindElement(By.Id("test_NameOndetailsView"));
+            var NameText = IdOfName.Text;
+
+            IWebElement IdOfAge = driver.FindElement(By.Id("test_AgeOnDetailsView"));
+            var AgeText = IdOfAge.Text;
+
+            IWebElement IdOFGender = driver.FindElement(By.Id("test_GenderOnDetailsView"));
+            var GenderText = IdOFGender.Text;
+
+            IWebElement IdOfSpecies = driver.FindElement(By.Id("test_SpeciesOnDetailsView"));
+            var SpeciesText = IdOfSpecies.Text;
+
+            Assert.False(TitleText == "Minu koer");
+            Assert.False(DescriptionText == "Ta on koer");
+            Assert.False(NameText == "Timm");
+            Assert.False(AgeText == "5");
+            Assert.False(GenderText == "Naine");
+            Assert.False(SpeciesText == "Koer");
+
+
+        }
     }
 }
