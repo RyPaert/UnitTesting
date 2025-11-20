@@ -71,6 +71,10 @@ namespace TestProject2
             InsertLogInData(driver);
 
             IWebElement SubmitLoginForm = driver.FindElement(By.Id("test_LoginButton"));
+
+            IWebElement RemeberMeButton = driver.FindElement(By.Id("test_rememberMeButton"));
+            RemeberMeButton.Click();
+
             SubmitLoginForm.Click();
         }
         private void InsertLogInData(IWebDriver driver) 
@@ -128,6 +132,25 @@ namespace TestProject2
 
             Assert.True(UserName == "Jane Doe");
 
+        }
+
+        [Fact]
+        public void CheckRememberMe()
+        {
+            IWebDriver driver = Start();
+
+            IWebElement idOfLogInIndex = driver.FindElement(By.Id("test_login_index"));
+            idOfLogInIndex.Click();
+
+            LogInAction(driver);
+
+            Thread.Sleep(500);
+
+            driver.Close();
+
+            Thread.Sleep(500);
+
+            driver = Start();
         }
 
 
