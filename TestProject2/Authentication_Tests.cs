@@ -135,7 +135,7 @@ namespace TestProject2
 
         [Fact]
         // Check what happent whene you enter wrong password in LogIn form
-        public void CheckPassword()
+        public void CheckPasswordErroeMessage()
         {
             IWebDriver driver = Start();
 
