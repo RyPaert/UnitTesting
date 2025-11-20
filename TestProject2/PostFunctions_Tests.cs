@@ -104,6 +104,29 @@ namespace TestProject2
             Assert.True(text == "Palun lisa pilt!");
         }
 
+        [Fact]
+        //Check Like button
+        public void LikeButton()
+        {
+            IWebDriver driver = Start();
+
+            IWebElement idOfLogInIndex = driver.FindElement(By.Id("test_login_index"));
+            idOfLogInIndex.Click();
+
+            Thread.Sleep(500);
+
+            LogInAction(driver);
+
+            Thread.Sleep(500);
+
+            IWebElement IdOfLike = driver.FindElement(By.Id("btn"));
+            IdOfLike.Click();
+
+            IWebElement IdOfLikeCount = driver.FindElement(By.Id("like"));
+            var count = IdOfLikeCount.Text;
+
+            Assert.True(count == "1");
+        }
 
         // Insert Post data
         private static void InsertPostData(IWebDriver driver)
