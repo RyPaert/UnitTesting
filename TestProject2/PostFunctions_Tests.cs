@@ -38,35 +38,7 @@ namespace TestProject2
 
             Thread.Sleep(500);
         }
-        // Insert Post data
-        private static void InsertPostData(IWebDriver driver)
-        {
-            IWebElement idofName = driver.FindElement(By.Id("test_NameLabel"));
-            idofName.SendKeys("Max");
-            Thread.Sleep(500);
-            IWebElement idofSpecies = driver.FindElement(By.Id("test_SpeciesLabel"));
-            idofSpecies.SendKeys("Kass");
-            Thread.Sleep(500);
-            IWebElement idofAge = driver.FindElement(By.Id("test_AgeLabel"));
-            idofAge.Clear();
-            idofAge.SendKeys("3");
-            Thread.Sleep(500);
-            IWebElement idofGender = driver.FindElement(By.Id("test_GenderLabel"));
-            idofGender.SendKeys("Mees");
-            Thread.Sleep(500);
-            IWebElement idofTitle = driver.FindElement(By.Id("test_TitleLabel"));
-            idofTitle.SendKeys("Minu kass");
-            Thread.Sleep(500);
-            IWebElement idofDescription = driver.FindElement(By.Id("test_Descriptionlabel"));
-            idofDescription.SendKeys("Ta on kass");
-            Thread.Sleep(500);
 
-            IWebElement uploadFile = driver.FindElement(By.Id("test_FileUpload"));
-            uploadFile.SendKeys("C:\\Users\\opilane\\source\\repos\\UnitTesting\\TestProject2\\Sources\\Cat.jpg");
-
-            IWebElement Test_AddPost = driver.FindElement(By.Id("test_SubmitPostFormButton"));
-            Test_AddPost.Click();
-        }
         [Fact]
         // Test Index title and description text
         public void CheckIndexDetailsInfo()
@@ -110,6 +82,58 @@ namespace TestProject2
             Thread.Sleep(500);
 
         }
+
+        [Fact]
+        // Check errormessage when user don´t use image
+        public void CheckImageErrorMessage()
+        {
+            IWebDriver driver = Start();
+
+            IWebElement Test_AddNewPostIndex = driver.FindElement(By.Id("test_AddNewPostIndexButton"));
+            Test_AddNewPostIndex.Click();
+
+            Thread.Sleep(500);
+
+            InsertPostDataWithOutImage(driver);
+
+            Thread.Sleep(500);
+
+            IWebElement ErrorMessage = driver.FindElement(By.XPath("//div[@class='alert alert-danger']"));
+            var text = ErrorMessage.Text;
+
+            Assert.True(text == "Palun lisa pilt!");
+        }
+
+
+        // Insert Post data
+        private static void InsertPostData(IWebDriver driver)
+        {
+                IWebElement idofName = driver.FindElement(By.Id("test_NameLabel"));
+                idofName.SendKeys("Max");
+                Thread.Sleep(500);
+                IWebElement idofSpecies = driver.FindElement(By.Id("test_SpeciesLabel"));
+                idofSpecies.SendKeys("Kass");
+                Thread.Sleep(500);
+                IWebElement idofAge = driver.FindElement(By.Id("test_AgeLabel"));
+                idofAge.Clear();
+                idofAge.SendKeys("3");
+                Thread.Sleep(500);
+                IWebElement idofGender = driver.FindElement(By.Id("test_GenderLabel"));
+                idofGender.SendKeys("Mees");
+                Thread.Sleep(500);
+                IWebElement idofTitle = driver.FindElement(By.Id("test_TitleLabel"));
+                idofTitle.SendKeys("Minu kass");
+                Thread.Sleep(500);
+                IWebElement idofDescription = driver.FindElement(By.Id("test_Descriptionlabel"));
+                idofDescription.SendKeys("Ta on kass");
+                Thread.Sleep(500);
+
+                IWebElement uploadFile = driver.FindElement(By.Id("test_FileUpload"));
+                uploadFile.SendKeys("C:\\Users\\opilane\\source\\repos\\UnitTesting\\TestProject2\\Sources\\Cat.jpg");
+
+                IWebElement Test_AddPost = driver.FindElement(By.Id("test_SubmitPostFormButton"));
+            Test_AddPost.Click();               
+        }
         // Login Function
         private void LogInAction(IWebDriver driver)
         {
@@ -136,6 +160,33 @@ namespace TestProject2
             idofPassword.SendKeys("JaneDoe1234");
 
             Thread.Sleep(500);
+        }
+
+        // Insert post data without image
+        private static void InsertPostDataWithOutImage(IWebDriver driver)
+        {
+            IWebElement idofName = driver.FindElement(By.Id("test_NameLabel"));
+            idofName.SendKeys("Max");
+            Thread.Sleep(500);
+            IWebElement idofSpecies = driver.FindElement(By.Id("test_SpeciesLabel"));
+            idofSpecies.SendKeys("Kass");
+            Thread.Sleep(500);
+            IWebElement idofAge = driver.FindElement(By.Id("test_AgeLabel"));
+            idofAge.Clear();
+            idofAge.SendKeys("3");
+            Thread.Sleep(500);
+            IWebElement idofGender = driver.FindElement(By.Id("test_GenderLabel"));
+            idofGender.SendKeys("Mees");
+            Thread.Sleep(500);
+            IWebElement idofTitle = driver.FindElement(By.Id("test_TitleLabel"));
+            idofTitle.SendKeys("Minu kass");
+            Thread.Sleep(500);
+            IWebElement idofDescription = driver.FindElement(By.Id("test_Descriptionlabel"));
+            idofDescription.SendKeys("Ta on kass");
+            Thread.Sleep(500);
+
+            IWebElement Test_AddPost = driver.FindElement(By.Id("test_SubmitPostFormButton"));
+            Test_AddPost.Click();
         }
     }
 }
