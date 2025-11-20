@@ -16,52 +16,54 @@ namespace TestProject2
             IWebDriver driver = new FirefoxDriver(driverlocation, options);
             driver.Url = "https://localhost:7260/";
             return driver;
-         
+
         }
         [Fact]
-        //registreerimine pos
+        //REG
         public void Register()
         {
             IWebDriver driver = Start();
 
             IWebElement idOfRealRegister = driver.FindElement(By.Id("test_index_Register"));
             idOfRealRegister.Click();
-            Thread.Sleep(500);
+
 
             GetRegisterData(driver);
 
-            IWebElement idOfRealRegisterCreate = driver.FindElement(By.Id("Test_Register_Create"));
-            idOfRealRegisterCreate.Click();
-            Thread.Sleep(500);
         }
-        //registreerimine andmete sisestus pos
-        private static void GetRegisterData(IWebDriver driver) 
+        //REG DATA
+        private static void GetRegisterData(IWebDriver driver)
         {
             IWebElement idOfUserName = driver.FindElement(By.Id("test_register_userName"));
             idOfUserName.Clear();
             idOfUserName.SendKeys("Test username");
-            Thread.Sleep(500);
+
 
             IWebElement idOfEmail = driver.FindElement(By.Id("test_regirster_email"));
             idOfEmail.Clear();
             idOfEmail.SendKeys("TestEmail@gmail.com");
-            Thread.Sleep(500);
+
 
             IWebElement idOfPassword = driver.FindElement(By.Id("test_register_password"));
             idOfPassword.Clear();
             idOfPassword.SendKeys("TestPassword");
-            Thread.Sleep(500);
+
 
             IWebElement idOfConfirmPassword = driver.FindElement(By.Id("test_register_confirmPassword"));
             idOfConfirmPassword.Clear();
             idOfConfirmPassword.SendKeys("TestPassword");
-            Thread.Sleep(500);
+
+            IWebElement idOfRealRegisterCreate = driver.FindElement(By.Id("Test_Register_Create"));
+            idOfRealRegisterCreate.Click();
+
         }
-        //login pos
+        //LOGIN
         [Fact]
         public void LogIn()
         {
             IWebDriver driver = Start();
+            IWebElement idOfRealRegister = driver.FindElement(By.Id("test_index_Register"));
+            idOfRealRegister.Click();
 
             IWebElement idOfRealLogIN = driver.FindElement(By.Id("test_indexLogIn"));
             idOfRealLogIN.Click();
@@ -69,26 +71,27 @@ namespace TestProject2
 
             GetLogInData(driver);
 
-            IWebElement idOfRealLogInCreate = driver.FindElement(By.Id("test_LogIn_Create"));
-            idOfRealLogInCreate.Click();
-            Thread.Sleep(500);
-           
         }
-        //login andmete sisestamine
+
+        //LOGIN DATA
         private static void GetLogInData(IWebDriver driver)
         {
             IWebElement idOfUserName = driver.FindElement(By.Id("test_logIn_userName"));
             idOfUserName.Clear();
             idOfUserName.SendKeys("Test username");
-            Thread.Sleep(500);
+
 
             IWebElement idOfEmail = driver.FindElement(By.Id("test_logIn_userPassword"));
             idOfEmail.Clear();
             idOfEmail.SendKeys("TestPassword");
+
+
+            IWebElement idOfRealLogInCreate = driver.FindElement(By.Id("test_LogIn_Create"));
+            idOfRealLogInCreate.Click();
             Thread.Sleep(500);
- 
+
         }
-        //login poss
+        //LOGOUT
         [Fact]
         public void LogOut()
         {
@@ -96,30 +99,25 @@ namespace TestProject2
 
             IWebElement idOfRealLogIN = driver.FindElement(By.Id("test_indexLogIn"));
             idOfRealLogIN.Click();
-            Thread.Sleep(500);
+
 
             GetLogInData(driver);
 
-            IWebElement idOfRealLogInCreate = driver.FindElement(By.Id("test_LogIn_Create"));
-            idOfRealLogInCreate.Click();
-            Thread.Sleep(500);
-
-
             IWebElement idOfLogOut = driver.FindElement(By.Id("test_logOut"));
             idOfLogOut.Click();
-            Thread.Sleep(500);
+
         }
-        //Create pos
+        //CREATE
         [Fact]
         public void CreatePost()
         {
             IWebDriver driver = Start();
+
             IWebElement idOfRealLogIN = driver.FindElement(By.Id("test_indexLogIn"));
             idOfRealLogIN.Click();
-            Thread.Sleep(500);
 
             GetLogInData(driver);
-            Thread.Sleep(500);
+
 
             IWebElement idOfRealCreateNewPost = driver.FindElement(By.Id("test_Create_Post"));
             idOfRealCreateNewPost.Click();
@@ -127,13 +125,8 @@ namespace TestProject2
 
             GetCreateData(driver);
 
-            //Image korda
-            //IWebElement idOfRealCreateButton = driver.FindElement(By.Id("test_Create_Button"));
-            //idOfRealCreateButton.Click();
-            //Thread.Sleep(500);
-
-
         }
+        //CREATE DATA
         private static void GetCreateData(IWebDriver driver)
         {
             IWebElement idOfCreateName = driver.FindElement(By.Id("test_Create_Name"));
@@ -166,14 +159,35 @@ namespace TestProject2
             idOfCreateDescription.SendKeys("bla bla cat");
             Thread.Sleep(500);
 
-            //Image
-            //IWebElement idOfCreateImage = driver.FindElement(By.Id("test_Create_Image"));
-            //idOfCreateImage.Clear();
-            //idOfCreateImage.SendKeys("TestPassword");
-            //Thread.Sleep(500);
+            IWebElement uploadFile = driver.FindElement(By.Id("test_Create_Image"));
+            uploadFile.SendKeys("C:\\Users\\opilane\\source\\repos\\UnitTesting\\TestProject2\\cat.jpg");
+            Thread.Sleep(500);
 
+            IWebElement idOfRealCreateButton = driver.FindElement(By.Id("test_Create_Button"));
+            idOfRealCreateButton.Click();
+            Thread.Sleep(500);
 
         }
+        //DELETE
+        [Fact]
+        public void DeletePost()
+        {
+            IWebDriver driver = Start();
+
+            IWebElement idOfRealLogIN = driver.FindElement(By.Id("test_indexLogIn"));
+            idOfRealLogIN.Click();
+
+            GetLogInData(driver);
+
+
+            IWebElement idOfRealCreateButton = driver.FindElement(By.Id("test_Delete_button"));
+            idOfRealCreateButton.Click();
+            Thread.Sleep(500);
+
+        }
+      
+     
+
 
     }
 }
