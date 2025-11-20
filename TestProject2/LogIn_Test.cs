@@ -185,8 +185,15 @@ namespace TestProject2
             Thread.Sleep(500);
 
         }
-      
-     
+        //Like
+        [Fact]
+        public void Like()
+        {
+            IWebDriver driver = Start();
+
+
+        }
+
 
 
     }
