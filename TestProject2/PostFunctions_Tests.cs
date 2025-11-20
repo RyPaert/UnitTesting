@@ -128,6 +128,56 @@ namespace TestProject2
             Assert.True(count == "1");
         }
 
+        [Fact]
+        // check if Details button work
+        public void PostDetailsView()
+        {
+            IWebDriver driver = Start();
+
+            IWebElement IdOfPostDetailsIndex = driver.FindElement(By.Id("Post"));
+            IdOfPostDetailsIndex.Click();
+        }
+
+
+        [Fact]
+        // Checks details data
+        public void CheckPostDetailsViewText()
+        {
+            IWebDriver driver = Start();
+
+            IWebElement IdOfPostDetailsIndex = driver.FindElement(By.Id("Post"));
+            IdOfPostDetailsIndex.Click();
+
+            IWebElement IdOfTitle = driver.FindElement(By.Id("test_TitleInDetailsView"));
+            var TitleText = IdOfTitle.Text;
+
+            IWebElement IdOfDescription = driver.FindElement(By.Id("test_DescriptionInDetailsView"));
+            var DescriptionText = IdOfDescription.Text;
+
+            IWebElement IdOfShowMore = driver.FindElement(By.Id("myBtn"));
+            IdOfShowMore.Click();
+
+            IWebElement IdOfName = driver.FindElement(By.Id("test_NameOndetailsView"));
+            var NameText = IdOfName.Text;
+
+            IWebElement IdOfAge = driver.FindElement(By.Id("test_AgeOnDetailsView"));
+            var AgeText = IdOfAge.Text;
+
+            IWebElement IdOFGender = driver.FindElement(By.Id("test_GenderOnDetailsView"));
+            var GenderText = IdOFGender.Text;
+
+            IWebElement IdOfSpecies = driver.FindElement(By.Id("test_SpeciesOnDetailsView"));
+            var SpeciesText = IdOfSpecies.Text;
+
+            Assert.True(TitleText == "Minu kass");
+            Assert.True(DescriptionText == "Ta on kass");
+            Assert.True(NameText == "Max");
+            Assert.True(AgeText == "3");
+            Assert.True(GenderText == "Mees");
+            Assert.True(SpeciesText == "Kass");
+
+
+        }
         // Insert Post data
         private static void InsertPostData(IWebDriver driver)
         {
