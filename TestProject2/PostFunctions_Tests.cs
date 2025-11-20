@@ -302,5 +302,71 @@ namespace TestProject2
 
 
         }
+
+        [Fact]
+        //Check Like button
+        public void LikeButtonCountisRight()
+        {
+            IWebDriver driver = Start();
+
+            IWebElement idOfLogInIndex = driver.FindElement(By.Id("test_login_index"));
+            idOfLogInIndex.Click();
+
+            Thread.Sleep(500);
+
+            LogInAction(driver);
+
+            Thread.Sleep(500);
+
+            IWebElement IdOfLike = driver.FindElement(By.Id("btn"));
+            IdOfLike.Click();
+
+            IWebElement IdOfLikeCount = driver.FindElement(By.Id("like"));
+            var count = IdOfLikeCount.Text;
+
+            Assert.False(count == "0");
+        }
+
+        [Fact]
+        // Check errormessage when user don´t use image
+        public void CheckIfImageErrorMessageIsRight()
+        {
+            IWebDriver driver = Start();
+
+            IWebElement Test_AddNewPostIndex = driver.FindElement(By.Id("test_AddNewPostIndexButton"));
+            Test_AddNewPostIndex.Click();
+
+            Thread.Sleep(500);
+
+            InsertPostDataWithOutImage(driver);
+
+            Thread.Sleep(500);
+
+            IWebElement ErrorMessage = driver.FindElement(By.XPath("//div[@class='alert alert-danger']"));
+            var text = ErrorMessage.Text;
+
+            Assert.False(text == "Palun lisa Image!");
+        }
+
+        [Fact]
+        // Test Index title and description text
+        public void CheckIndexDetailsDontDisplayWrongData()
+        {
+            IWebDriver driver = Start();
+
+            Thread.Sleep(500);
+
+            IWebElement dataofTitle = driver.FindElement(By.Id("test_IndexTitle"));
+            var title = dataofTitle.Text;
+
+            IWebElement dataofDescription = driver.FindElement(By.Id("test_IndexDescription"));
+            var Description = dataofDescription.Text;
+
+            Assert.False(title == "Minu Koer");
+
+            Assert.False(Description == "Ta on Koer");
+
+            Thread.Sleep(500);
+        }
     }
 }
