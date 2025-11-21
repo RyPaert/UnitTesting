@@ -146,11 +146,13 @@ namespace TestProject2
 
             Thread.Sleep(500);
 
-            driver.Close();
+            driver.SwitchTo().NewWindow(WindowType.Tab);
+            driver.Navigate().GoToUrl("https://localhost:7260/");
 
-            Thread.Sleep(500);
+            IWebElement dataofUserName = driver.FindElement(By.Id("CheckUserName"));
+            var UserName = dataofUserName.Text;
 
-            driver = Start();
+            Assert.True(UserName == "Jane Doe");
         }
 
 
