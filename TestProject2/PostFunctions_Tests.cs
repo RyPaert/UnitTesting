@@ -130,7 +130,7 @@ namespace TestProject2
 
         [Fact]
         // check if Details button work
-        public void PostDetailsView()
+        public void OpenPost()
         {
             IWebDriver driver = Start();
 
@@ -265,7 +265,7 @@ namespace TestProject2
         //NEGATIVE TESTS
         [Fact]
         // Checks details data
-        public void CheckPostDetailsDontAcceptWrongData()
+        public void CheckPostDetailsDontDisplayWrongData()
         {
             IWebDriver driver = Start();
 
@@ -305,7 +305,7 @@ namespace TestProject2
 
         [Fact]
         //Check Like button
-        public void LikeButtonCountisRight()
+        public void LikeButtonCountIsRight()
         {
             IWebDriver driver = Start();
 
