@@ -1,4 +1,6 @@
+using System.Numerics;
 using OpenQA.Selenium;
+using OpenQA.Selenium.BiDi.Script;
 using OpenQA.Selenium.Firefox;
 
 namespace TestProject2
@@ -7,7 +9,7 @@ namespace TestProject2
     {
         private static IWebDriver Start()
         {
-            string driverlocation = "C:\\Users\\opilane\\source\\repos\\TestProject2\\bin\\Debug\\net8.0";
+            string driverlocation = "C:\\Users\\opilane\\source\\repos\\UnitTesting\\TestProject2\\driver"; 
             string binaryLocation = "C:\\Users\\opilane\\source\\repos\\FirefoxPortable\\App\\Firefox64\\firefox.exe";
 
             FirefoxOptions options = new FirefoxOptions();
@@ -180,19 +182,35 @@ namespace TestProject2
             GetLogInData(driver);
 
 
-            IWebElement idOfRealCreateButton = driver.FindElement(By.Id("test_Delete_button"));
-            idOfRealCreateButton.Click();
+            IWebElement idOfRealDeleteButton = driver.FindElement(By.Id("test_Delete_button"));
+            idOfRealDeleteButton.Click();
             Thread.Sleep(500);
 
         }
-        //Like
+        //DETAILS
         [Fact]
-        public void Like()
+        public void DetailsPost()
+        {
+            IWebDriver driver = Start();
+
+            IWebElement idOfRealDetails = driver.FindElement(By.Id("Post"));
+            idOfRealDetails.Click();
+            Thread.Sleep(500);
+
+            GetCreateData(driver);
+
+        }
+
+        //LIKE
+        [Fact]
+        public void PostLike()
         {
             IWebDriver driver = Start();
 
 
         }
+
+
 
 
 
