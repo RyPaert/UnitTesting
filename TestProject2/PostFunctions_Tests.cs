@@ -8,6 +8,9 @@ using OpenQA.Selenium;
 
 namespace TestProject2
 {
+    [TestCaseOrderer(
+    ordererTypeName: "TestProject2.PriorityOrderer",
+    ordererAssemblyName: "TestProject2")]
     public class PostFunctions_Tests
     {
         //POSITIVE TESTS
@@ -23,7 +26,7 @@ namespace TestProject2
             driver.Url = "https://localhost:7260/";
             return driver;
         }
-        [Fact]
+        [Fact, TestPriority(9)]
         // Test Add New Post Function
         public void AddNewPost() 
         { 
@@ -39,7 +42,7 @@ namespace TestProject2
             Thread.Sleep(500);
         }
 
-        [Fact]
+        [Fact, TestPriority(10)]
         // Test Index title and description text
         public void CheckIndexDetailsInfo()
         {
@@ -60,7 +63,7 @@ namespace TestProject2
             Thread.Sleep(500);
         }
 
-        [Fact]
+        [Fact, TestPriority(19)]
         // Test delete function
         public void DeletePost()
         {
@@ -83,7 +86,7 @@ namespace TestProject2
 
         }
 
-        [Fact]
+        [Fact, TestPriority(11)]
         // Check errormessage when user don´t use image
         public void CheckImageErrorMessage()
         {
@@ -104,7 +107,7 @@ namespace TestProject2
             Assert.True(text == "Palun lisa pilt!");
         }
 
-        [Fact]
+        [Fact, TestPriority(12)]
         //Check Like button
         public void LikeButton()
         {
@@ -128,7 +131,7 @@ namespace TestProject2
             Assert.True(count == "1");
         }
 
-        [Fact]
+        [Fact, TestPriority(13)]
         // check if Details button work
         public void OpenPost()
         {
@@ -139,7 +142,7 @@ namespace TestProject2
         }
 
 
-        [Fact]
+        [Fact, TestPriority(14)]
         // Checks details data
         public void CheckPostDetailsViewText()
         {
@@ -263,7 +266,7 @@ namespace TestProject2
         }
 
         //NEGATIVE TESTS
-        [Fact]
+        [Fact, TestPriority(15)]
         // Checks details data
         public void CheckPostDetailsDontDisplayWrongData()
         {
@@ -303,7 +306,7 @@ namespace TestProject2
 
         }
 
-        [Fact]
+        [Fact, TestPriority(16)]
         //Check Like button
         public void LikeButtonCountIsRight()
         {
@@ -327,7 +330,7 @@ namespace TestProject2
             Assert.False(count == "0");
         }
 
-        [Fact]
+        [Fact, TestPriority(17)]
         // Check errormessage when user don´t use image
         public void CheckIfImageErrorMessageIsRight()
         {
@@ -348,7 +351,7 @@ namespace TestProject2
             Assert.False(text == "Palun lisa Image!");
         }
 
-        [Fact]
+        [Fact, TestPriority(18)]
         // Test Index title and description text
         public void CheckIndexDetailsDontDisplayWrongData()
         {

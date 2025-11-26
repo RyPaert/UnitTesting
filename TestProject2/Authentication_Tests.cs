@@ -3,6 +3,9 @@ using OpenQA.Selenium.Firefox;
 
 namespace TestProject2
 {
+    [TestCaseOrderer(
+    ordererTypeName: "TestProject2.PriorityOrderer",
+    ordererAssemblyName: "TestProject2")]
     public class Authentication_Tests
     {
         //POSITIVE TESTS
@@ -19,200 +22,220 @@ namespace TestProject2
             return driver;
         }
 
-        [Fact]
-        // Registreerimimne
-        public void SignUpUser()
-        {
-            IWebDriver driver = Start();
+            public static bool Test1Called;
+            public static bool Test2Called;
+            public static bool Test3Called;
+            public static bool Test4Called;
+            public static bool Test5Called;
+            public static bool Test6Called;
+            public static bool Test7Called;
+            public static bool Test8Called;
 
-            IWebElement idOfRegisterIndex = driver.FindElement(By.Id("test_register_index"));
-            idOfRegisterIndex.Click();
+            [Fact, TestPriority(1)]
+            // Registreerimimne
+            public void SignUpUser()
+            {
+                Test1Called = true;
 
-            InsertRegistrationData(driver);
+                Assert.False(Test2Called);
+                Assert.False(Test3Called);
+                Assert.False(Test4Called);
+                Assert.False(Test5Called);
+                Assert.False(Test6Called);
+                Assert.False(Test7Called);
+                Assert.False(Test8Called);
 
-            IWebElement registerAccount = driver.FindElement(By.Id("test_registerAccountButton"));
-            registerAccount.Click();
+                IWebDriver driver = Start();
 
-        }
-        private void InsertRegistrationData(IWebDriver driver)
-        {
-            IWebElement idofName = driver.FindElement(By.Id("test_Username"));
-            idofName.SendKeys("Jane Doe");
+                IWebElement idOfRegisterIndex = driver.FindElement(By.Id("test_register_index"));
+                idOfRegisterIndex.Click();
 
-            IWebElement idofEmail = driver.FindElement(By.Id("test_Email"));
-            idofEmail.SendKeys("Jane.Doe@gmail.com");
+                InsertRegistrationData(driver);
 
-            IWebElement idofPassword = driver.FindElement(By.Id("test_Password"));
-            idofPassword.SendKeys("JaneDoe1234");
+                IWebElement registerAccount = driver.FindElement(By.Id("test_registerAccountButton"));
+                registerAccount.Click();
 
-            IWebElement idofConfirmPassword = driver.FindElement(By.Id("test_ConfirmPassword"));
-            idofConfirmPassword.SendKeys("JaneDoe1234");
+            }
+            private void InsertRegistrationData(IWebDriver driver)
+            {
+                IWebElement idofName = driver.FindElement(By.Id("test_Username"));
+                idofName.SendKeys("Jane Doe");
 
-        }
+                IWebElement idofEmail = driver.FindElement(By.Id("test_Email"));
+                idofEmail.SendKeys("Jane.Doe@gmail.com");
 
-        [Fact]
-        //Whene User already have a account
-        public void HaveAnAccount()
-        {
-            IWebDriver driver = Start();
+                IWebElement idofPassword = driver.FindElement(By.Id("test_Password"));
+                idofPassword.SendKeys("JaneDoe1234");
 
-            IWebElement idOfRegisterIndex = driver.FindElement(By.Id("test_register_index"));
-            idOfRegisterIndex.Click();
+                IWebElement idofConfirmPassword = driver.FindElement(By.Id("test_ConfirmPassword"));
+                idofConfirmPassword.SendKeys("JaneDoe1234");
 
-            IWebElement HaveAnaccountLink = driver.FindElement(By.Id("test_HaveAnAccount"));
-            HaveAnaccountLink.Click();
+            }
 
-            LogInAction(driver);
+            [Fact, TestPriority(2)]
+            //Whene User already have a account
+            public void HaveAnAccount()
+            {
+                IWebDriver driver = Start();
 
-        }
-        private void LogInAction(IWebDriver driver)
-        {
+                IWebElement idOfRegisterIndex = driver.FindElement(By.Id("test_register_index"));
+                idOfRegisterIndex.Click();
 
-            InsertLogInData(driver);
+                IWebElement HaveAnaccountLink = driver.FindElement(By.Id("test_HaveAnAccount"));
+                HaveAnaccountLink.Click();
 
-            IWebElement SubmitLoginForm = driver.FindElement(By.Id("test_LoginButton"));
+                LogInAction(driver);
 
-            IWebElement RemeberMeButton = driver.FindElement(By.Id("test_rememberMeButton"));
-            RemeberMeButton.Click();
+            }
+            private void LogInAction(IWebDriver driver)
+            {
 
-            SubmitLoginForm.Click();
-        }
-        private void InsertLogInData(IWebDriver driver) 
-        {
-            IWebElement idOfName = driver.FindElement(By.Id("test_LoginUserName"));
-            idOfName.SendKeys("Jane Doe");
+                InsertLogInData(driver);
 
-            IWebElement idofPassword = driver.FindElement(By.Id("test_LogInPassword"));
-            idofPassword.SendKeys("JaneDoe1234");
+                IWebElement SubmitLoginForm = driver.FindElement(By.Id("test_LoginButton"));
 
-        }
+                IWebElement RemeberMeButton = driver.FindElement(By.Id("test_rememberMeButton"));
+                RemeberMeButton.Click();
 
-        [Fact]
-        //LogIn function Test
-        public void LogIn()
-        {
-            IWebDriver driver = Start();
+                SubmitLoginForm.Click();
+            }
+            private void InsertLogInData(IWebDriver driver)
+            {
+                IWebElement idOfName = driver.FindElement(By.Id("test_LoginUserName"));
+                idOfName.SendKeys("Jane Doe");
 
-            IWebElement idOfLogInIndex = driver.FindElement(By.Id("test_login_index"));
-            idOfLogInIndex.Click();
+                IWebElement idofPassword = driver.FindElement(By.Id("test_LogInPassword"));
+                idofPassword.SendKeys("JaneDoe1234");
 
-            LogInAction(driver);
+            }
 
-        }
+            [Fact, TestPriority(3)]
+            //LogIn function Test
+            public void LogIn()
+            {
+                IWebDriver driver = Start();
 
-        [Fact]
-        //LogOut function test
-        public void LogOut()
-        {
-            IWebDriver driver = Start();
+                IWebElement idOfLogInIndex = driver.FindElement(By.Id("test_login_index"));
+                idOfLogInIndex.Click();
 
-            IWebElement idOfLogInIndex = driver.FindElement(By.Id("test_login_index"));
-            idOfLogInIndex.Click();
+                LogInAction(driver);
 
-            LogInAction(driver);
+            }
 
-            IWebElement idOfLogOutIndex = driver.FindElement(By.Id("test_logout_button"));
-            idOfLogOutIndex.Click();
+            [Fact, TestPriority(4)]
+            //LogOut function test
+            public void LogOut()
+            {
+                IWebDriver driver = Start();
 
-        }
+                IWebElement idOfLogInIndex = driver.FindElement(By.Id("test_login_index"));
+                idOfLogInIndex.Click();
 
-        [Fact]
-        // Check if login username is correct
-        public void CheckCorrectUserName()
-        {
-            IWebDriver driver = Start();
+                LogInAction(driver);
 
-            IWebElement idOfLogInIndex = driver.FindElement(By.Id("test_login_index"));
-            idOfLogInIndex.Click();
+                IWebElement idOfLogOutIndex = driver.FindElement(By.Id("test_logout_button"));
+                idOfLogOutIndex.Click();
 
-            LogInAction(driver);
+            }
 
-            IWebElement dataofUserName = driver.FindElement(By.Id("CheckUserName"));
-            var UserName = dataofUserName.Text;
+            [Fact, TestPriority(5)]
+            // Check if login username is correct
+            public void CheckCorrectUserName()
+            {
+                IWebDriver driver = Start();
 
-            Assert.True(UserName == "Jane Doe");
+                IWebElement idOfLogInIndex = driver.FindElement(By.Id("test_login_index"));
+                idOfLogInIndex.Click();
 
-        }
+                LogInAction(driver);
 
-        [Fact]
-        public void CheckRememberMe()
-        {
-            IWebDriver driver = Start();
+                IWebElement dataofUserName = driver.FindElement(By.Id("CheckUserName"));
+                var UserName = dataofUserName.Text;
 
-            IWebElement idOfLogInIndex = driver.FindElement(By.Id("test_login_index"));
-            idOfLogInIndex.Click();
+                Assert.True(UserName == "Jane Doe");
 
-            LogInAction(driver);
+            }
 
-            Thread.Sleep(500);
+            [Fact, TestPriority(6)]
+            public void CheckRememberMe()
+            {
+                IWebDriver driver = Start();
 
-            driver.SwitchTo().NewWindow(WindowType.Tab);
-            driver.Navigate().GoToUrl("https://localhost:7260/");
+                IWebElement idOfLogInIndex = driver.FindElement(By.Id("test_login_index"));
+                idOfLogInIndex.Click();
 
-            IWebElement dataofUserName = driver.FindElement(By.Id("CheckUserName"));
-            var UserName = dataofUserName.Text;
+                LogInAction(driver);
 
-            Assert.True(UserName == "Jane Doe");
-        }
+                Thread.Sleep(500);
 
+                driver.SwitchTo().NewWindow(WindowType.Tab);
+                driver.Navigate().GoToUrl("https://localhost:7260/");
 
-        //NEGATIVE TESTS
+                IWebElement dataofUserName = driver.FindElement(By.Id("CheckUserName"));
+                var UserName = dataofUserName.Text;
 
-        [Fact]
-        // Check what happent whene you enter wrong password in LogIn form
-        public void CheckPasswordErroeMessage()
-        {
-            IWebDriver driver = Start();
-
-            IWebElement idOfLogInIndex = driver.FindElement(By.Id("test_login_index"));
-            idOfLogInIndex.Click();
-
-            LogInActionWithWrongPassword(driver);
-
-            IWebElement ErrorMessage = driver.FindElement(By.XPath("//div//ul//li"));
-            var errorText = ErrorMessage.Text;
-
-            Assert.False(errorText == "dewubuy");
-        }
-
-        [Fact]
-        //Check if username is false
-        public void CheckFalseUserName()
-        {
-            IWebDriver driver = Start();
-
-            IWebElement idOfLogInIndex = driver.FindElement(By.Id("test_login_index"));
-            idOfLogInIndex.Click();
-
-            LogInAction(driver);
-
-            IWebElement dataofUserName = driver.FindElement(By.Id("CheckUserName"));
-            var UserName = dataofUserName.Text;
-
-            Assert.False(UserName == "Jane Puu");
-
-        }
-        // Login with wrong password
-        private void LogInActionWithWrongPassword(IWebDriver driver)
-        {
-
-            InsertWrongLogInData(driver);
+                Assert.True(UserName == "Jane Doe");
+            }
 
 
-            IWebElement SubmitLoginForm = driver.FindElement(By.Id("test_LoginButton"));
-            SubmitLoginForm.Click();
+            //NEGATIVE TESTS
 
-        }
-        // Insert wrong password to login form
-        private void InsertWrongLogInData(IWebDriver driver)
-        {
-            IWebElement idOfName = driver.FindElement(By.Id("test_LoginUserName"));
-            idOfName.SendKeys("Jane Doe");
+            [Fact, TestPriority(7)]
+            // Check what happent whene you enter wrong password in LogIn form
+            public void CheckPasswordErroeMessage()
+            {
+                IWebDriver driver = Start();
+
+                IWebElement idOfLogInIndex = driver.FindElement(By.Id("test_login_index"));
+                idOfLogInIndex.Click();
+
+                LogInActionWithWrongPassword(driver);
+
+                IWebElement ErrorMessage = driver.FindElement(By.XPath("//div//ul//li"));
+                var errorText = ErrorMessage.Text;
+
+                Assert.False(errorText == "dewubuy");
+            }
+
+            [Fact, TestPriority(8)]
+            //Check if username is false
+            public void CheckFalseUserName()
+            {
+                IWebDriver driver = Start();
+
+                IWebElement idOfLogInIndex = driver.FindElement(By.Id("test_login_index"));
+                idOfLogInIndex.Click();
+
+                LogInAction(driver);
+
+                IWebElement dataofUserName = driver.FindElement(By.Id("CheckUserName"));
+                var UserName = dataofUserName.Text;
+
+                Assert.False(UserName == "Jane Puu");
+
+            }
+            // Login with wrong password
+            private void LogInActionWithWrongPassword(IWebDriver driver)
+            {
+
+                InsertWrongLogInData(driver);
 
 
-            IWebElement idofPassword = driver.FindElement(By.Id("test_LogInPassword"));
-            idofPassword.SendKeys("JaneDoe12");
+                IWebElement SubmitLoginForm = driver.FindElement(By.Id("test_LoginButton"));
+                SubmitLoginForm.Click();
 
-        }
+            }
+            // Insert wrong password to login form
+            private void InsertWrongLogInData(IWebDriver driver)
+            {
+                IWebElement idOfName = driver.FindElement(By.Id("test_LoginUserName"));
+                idOfName.SendKeys("Jane Doe");
+
+
+                IWebElement idofPassword = driver.FindElement(By.Id("test_LogInPassword"));
+                idofPassword.SendKeys("JaneDoe12");
+
+            }
+
     }
 }
