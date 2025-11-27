@@ -5,7 +5,8 @@ using OpenQA.Selenium.Firefox;
 
 namespace TestProject2
 {
-    public class LogIn_Test
+ 
+    public class Catblog_Test
     {
         private static IWebDriver Start()
         {
