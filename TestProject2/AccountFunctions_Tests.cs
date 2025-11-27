@@ -18,7 +18,7 @@ namespace TestProject2
             driver.Url = "https://localhost:7260/";
             return driver;
         }
-        // Affirmative tests
+        // Acceptance tests
 
         //[Fact, TestPriority(1)]
         //public void RegisterAccount()
@@ -43,6 +43,9 @@ namespace TestProject2
 
             Login(driver);
 			driver.Quit();
+
+			Thread.Sleep(500);
+			driver.Quit();
 		}
 
 		[Fact, TestPriority(3)]
@@ -57,6 +60,9 @@ namespace TestProject2
 			HaveAnaccountLink.Click();
 
             Login(driver);
+
+			Thread.Sleep(500);
+			driver.Quit();
 		}
 
 		[Fact, TestPriority(4)]
@@ -71,8 +77,10 @@ namespace TestProject2
 
             IWebElement idOfLogoutIndex = driver.FindElement(By.Id("test_Logout_Index"));
             idOfLogoutIndex.Click();
-            driver.Quit();
-        }
+
+			Thread.Sleep(500);
+			driver.Quit();
+		}
 
         [Fact, TestPriority(5)]
         public void CheckLayoutUsername()
@@ -88,16 +96,77 @@ namespace TestProject2
             var layoutUsername = layoutUsernameCheck.Text;
 
             Assert.True(layoutUsername == "Jane Doe");
+
+			Thread.Sleep(500);
+			driver.Quit();
+		}
+        [Fact, TestPriority(6)]
+        public void RememberMeCheck()
+        {
+            IWebDriver driver = Start();
+
+			IWebElement idOfLoginIndex = driver.FindElement(By.Id("test_login_index"));
+			idOfLoginIndex.Click();
+
+			Login(driver);
+
+			Thread.Sleep(500);
+
+			driver.SwitchTo().NewWindow(WindowType.Tab);
+			driver.Navigate().GoToUrl("https://localhost:7260");
+
+			IWebElement layoutUsernameCheck = driver.FindElement(By.Id("test_layoutUsername"));
+			var layoutUsername = layoutUsernameCheck.Text;
+
+			Assert.True(layoutUsername == "Jane Doe");
+
+            Thread.Sleep(500);
 			driver.Quit();
 		}
 
+        //Failure tests
+        [Fact, TestPriority(7)]
+        public void CheckFalseLayoutUsername()
+        {
+			IWebDriver driver = Start();
 
+			IWebElement idOfLoginIndex = driver.FindElement(By.Id("test_login_index"));
+			idOfLoginIndex.Click();
 
+			Login(driver);
 
+			IWebElement layoutUsernameCheck = driver.FindElement(By.Id("test_layoutUsername"));
+			var layoutUsername = layoutUsernameCheck.Text;
 
+			Assert.False(layoutUsername == "Jane D0e");
 
-        // Test Functions
-        private void InsertRegistrationData(IWebDriver driver)
+			Thread.Sleep(500);
+			driver.Quit();
+		}
+
+        [Fact, TestPriority(8)]
+		public void LoginWithWrongData()
+		{
+			IWebDriver driver = Start();
+			IWebElement idOfLoginIndex = driver.FindElement(By.Id("test_login_index"));
+			idOfLoginIndex.Click();
+
+			IWebElement idOfName = driver.FindElement(By.Id("test_LoginUsername"));
+			idOfName.SendKeys("Jane Doeeee");
+
+			Thread.Sleep(500);
+
+			IWebElement idofPassword = driver.FindElement(By.Id("test_LoginPassword"));
+			idofPassword.SendKeys("JaneDoe12345125");
+
+			Login(driver);
+
+			Thread.Sleep(1000);
+			driver.Quit();
+		}
+
+		// Test Functions
+		private void InsertRegistrationData(IWebDriver driver)
         {
 			IWebElement idofUsername = driver.FindElement(By.Id("test_Username"));
 			idofUsername.SendKeys("Jane Doe");
