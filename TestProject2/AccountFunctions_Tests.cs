@@ -18,23 +18,26 @@ namespace TestProject2
             driver.Url = "https://localhost:7260/";
             return driver;
         }
-        // Acceptance tests
+		// Acceptance tests
 
-        //[Fact, TestPriority(1)]
-        //public void RegisterAccount()
-        //{
-        //    IWebDriver driver = Start();
+		[Fact, TestPriority(1)]
+		public void RegisterAccount()
+		{
+			IWebDriver driver = Start();
 
-        //    IWebElement idOfRegisterIndex = driver.FindElement(By.Id("test_register_index"));
-        //    idOfRegisterIndex.Click();
+			IWebElement idOfRegisterIndex = driver.FindElement(By.Id("test_register_index"));
+			idOfRegisterIndex.Click();
 
-        //    InsertRegistrationData(driver);
+			InsertRegistrationData(driver);
 
-        //    IWebElement registerAccount = driver.FindElement(By.Id("test_registerAccountButton"));
-        //    registerAccount.Click();
-        //}
+			IWebElement registerAccount = driver.FindElement(By.Id("test_registerAccountButton"));
+			registerAccount.Click();
 
-        [Fact, TestPriority(2)]
+			Thread.Sleep(500);
+			driver.Quit();
+		}
+
+		[Fact, TestPriority(2)]
         public void LogIntoAccount()
         {
             IWebDriver driver = Start();
@@ -42,7 +45,6 @@ namespace TestProject2
             idOfLoginIndex.Click();
 
             Login(driver);
-			driver.Quit();
 
 			Thread.Sleep(500);
 			driver.Quit();
