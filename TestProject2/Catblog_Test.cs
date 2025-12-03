@@ -67,7 +67,7 @@ namespace TestProject2
 
         }
         //I  HAVE ACCOUNT BUTTON
-        [Fact]
+        [Fact, TestPriority(2)]
         public void IHaveAccount()
         {
             IWebDriver driver = Start();
@@ -80,7 +80,7 @@ namespace TestProject2
             idOfIHaveAccount.Click();
         }
         //LOGIN
-        [Fact, TestPriority(2)]
+        [Fact, TestPriority(3)]
         public void LogIn()
         {
             IWebDriver driver = Start();
@@ -112,7 +112,7 @@ namespace TestProject2
         }
 
         //CONTROLLING USERNAME LOGIN
-        [Fact]
+        [Fact, TestPriority(4)]
         public void ControllUserName()
         {
             IWebDriver driver = Start();
@@ -131,7 +131,7 @@ namespace TestProject2
 
         }
         //REMEBER ME BUTTON
-        [Fact, TestPriority(2)]
+        [Fact, TestPriority(5)]
         public void RemeberMe()
         {
             IWebDriver driver = Start();
@@ -151,7 +151,7 @@ namespace TestProject2
         
        
         //LOGOUT
-        [Fact, TestPriority(3)]
+        [Fact, TestPriority(6)]
         public void LogOut()
         {
             IWebDriver driver = Start();
@@ -169,7 +169,7 @@ namespace TestProject2
 
 
         //CREATE
-        [Fact, TestPriority(4)]
+        [Fact, TestPriority(7)]
         public void CreatePost()
         {
             IWebDriver driver = Start();
@@ -233,7 +233,7 @@ namespace TestProject2
 
         }
 
-        [Fact]
+        [Fact, TestPriority(8)]
         //CREATE POST WITH NO IMAGE
         public void CreatePostWithNoImage()
         {
@@ -297,7 +297,7 @@ namespace TestProject2
         }
 
         //POST TITLE AND DESCRIPTION
-        [Fact, TestPriority(5)]
+        [Fact, TestPriority(9)]
         public void PostInfo()
         {
             IWebDriver driver = Start();
@@ -319,7 +319,7 @@ namespace TestProject2
         }
 
         //DETAILS
-        [Fact, TestPriority(6)]
+        [Fact, TestPriority(10)]
         public void DetailsPost()
         {
            IWebDriver driver = Start();
@@ -331,7 +331,7 @@ namespace TestProject2
         }
 
         //DETAILS INFO POS
-        [Fact]
+        [Fact, TestPriority(11)]
         public void DetailsInfoPost()
         {
             IWebDriver driver = Start();
@@ -373,7 +373,7 @@ namespace TestProject2
         }
 
         //DETAILS INFO NEG
-        [Fact]
+        [Fact, TestPriority(12)]
         public void DetailsInfoPostNEG()
         {
             IWebDriver driver = Start();
@@ -414,9 +414,8 @@ namespace TestProject2
 
         }
 
-        ////LIKE
-        [Fact//, TestPriority()
-             ]
+        //LIKE
+        [Fact, TestPriority(13)]
         public void PostLike()
         {
             IWebDriver driver = Start();
@@ -438,8 +437,7 @@ namespace TestProject2
         }
 
         //DELETE
-        [Fact//, TestPriority()
-             ]
+        [Fact, TestPriority(14)]
         public void DeletePost()
         {
             IWebDriver driver = Start();
