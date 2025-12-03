@@ -23,6 +23,10 @@ namespace TestProject2
             return driver;
 
         }
+
+
+        //ACCOUNT STUFF
+
         [Fact, TestPriority(1)]
         //REG
         public void Register()
@@ -88,24 +92,6 @@ namespace TestProject2
             GetLogInData(driver);
 
         }
-        //REMEBER ME BUTTON
-        [Fact, TestPriority(2)]
-        public void RemeberMe()
-        {
-            IWebDriver driver = Start();
-
-            IWebElement idOfRealLogIN = driver.FindElement(By.Id("test_indexLogIn"));
-            idOfRealLogIN.Click();
-            Thread.Sleep(500);
-
-            IWebElement idOfRemeberMe = driver.FindElement(By.Id("test_remeberMe_button"));
-            idOfRemeberMe.Click();
-            Thread.Sleep(500);
-
-            GetLogInData(driver);
-
-        }
-
         //LOGIN DATA
         private static void GetLogInData(IWebDriver driver)
         {
@@ -124,6 +110,45 @@ namespace TestProject2
             Thread.Sleep(500);
 
         }
+
+        //CONTROLLING USERNAME LOGIN
+        [Fact]
+        public void ControllUserName()
+        {
+            IWebDriver driver = Start();
+
+            IWebElement idOfRealLogIN = driver.FindElement(By.Id("test_indexLogIn"));
+            idOfRealLogIN.Click();
+            Thread.Sleep(500);
+
+            GetLogInData(driver);
+
+
+            IWebElement idOfUSernameLable = driver.FindElement(By.Id("test_logIn_userName"));
+            var username = idOfUSernameLable.Text;
+
+            Assert.True(username == "Test username");
+
+        }
+        //REMEBER ME BUTTON
+        [Fact, TestPriority(2)]
+        public void RemeberMe()
+        {
+            IWebDriver driver = Start();
+
+            IWebElement idOfRealLogIN = driver.FindElement(By.Id("test_indexLogIn"));
+            idOfRealLogIN.Click();
+            Thread.Sleep(500);
+
+            IWebElement idOfRemeberMe = driver.FindElement(By.Id("test_remeberMe_button"));
+            idOfRemeberMe.Click();
+            Thread.Sleep(500);
+
+            GetLogInData(driver);
+
+        }
+
+        
        
         //LOGOUT
         [Fact, TestPriority(3)]
@@ -141,36 +166,6 @@ namespace TestProject2
             idOfLogOut.Click();
 
         }
-
-        ////CONTROLLING USERNAME LOGIN
-        //[Fact]
-        //public void ControllUserName()
-        //{
-        //    IWebDriver driver = Start();
-
-        //    IWebElement idOfRealLogIN = driver.FindElement(By.Id("test_indexLogIn"));
-        //    idOfRealLogIN.Click();
-        //    Thread.Sleep(500);
-
-        //    IWebElement idOfUserName = driver.FindElement(By.Id("test_logIn_userName"));
-        //    idOfUserName.Clear();
-        //    idOfUserName.SendKeys("Test username");
-
-
-        //    IWebElement idOfUSernameLable = driver.FindElement(By.Id("test_logIn_userName"));
-        //    var username = idOfUSernameLable.Text;
-
-        //    Assert.True(username == "Test username");
-
-        //}
-
-
-
-        //NEG
-
-
-
-
 
 
         //CREATE
@@ -334,6 +329,7 @@ namespace TestProject2
             Thread.Sleep(500);
 
         }
+
         //DETAILS INFO POS
         [Fact]
         public void DetailsInfoPost()
@@ -440,6 +436,7 @@ namespace TestProject2
             Assert.False(count == "0");
 
         }
+
         //DELETE
         [Fact//, TestPriority()
              ]
